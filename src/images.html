@@ -1,0 +1,60 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Modern way of images</title>
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/images.css">
+</head>
+<body>
+<div class="container">
+  <h1>Modern way of images</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, earum.</p>
+  
+<!--
+  Известные баги aspect-ratio:
+  - Не работает с flexbox и grid
+  - Не работает с box-sizing: content-box
+  - Установка aspect-ratio без width и height дает сдвиг CLS
+  - Если изображение не загрузилось (не существует) то оно сильно растягивается, поэтому в src всегда имеем заглушку по умолчанию
+  https://www.quirksmode.org/blog/archives/2021/05/aspectratio.html
+  
+  Ссылки с примерами для прочтения об aspect-ratio:
+  https://web.dev/optimize-cls/?utm_source=lighthouse&utm_medium=devtools#images-without-dimensions
+  https://web.dev/aspect-ratio/
+  
+  Хорошая статья, в которой девушка делает карточки на основе aspect-ratio
+  https://css-tricks.com/variable-aspect-ratio-card-with-conic-gradients-meeting-along-the-diagonal/
+  
+  Калькулятор aspect-ratio: https://aspectratiocalculator.com/4-3.html
+  
+-->
+
+
+  
+  <h2>Type 1</h2>
+  <div class="type-1">
+    <img
+        width="880"
+        height="600"
+        src="https://via.placeholder.com/800x600"
+        srcset="https://via.placeholder.com/600x450 600w, https://via.placeholder.com/720x540 720w, https://via.placeholder.com/880x600 880w"
+        alt="alt
+    ">
+    <img src="https://via.placeholder.com/1600x1200" alt="alt" width="1600" height="1200">
+    <img
+        src="inexistent"
+        alt="inexistent type-1"
+        width="880"
+        height="600"
+    >
+  </div>
+
+
+
+
+</div>
+</body>
+</html>
