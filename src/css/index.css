@@ -3,3 +3,9 @@
     max-width: 100%;
     margin: 0 auto;
 }
+
+body{
+    font-size: 18px;
+    line-height: 1.5rem;
+    font-family: sans-serif;
+}

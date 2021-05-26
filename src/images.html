@@ -1,60 +1,143 @@
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Modern way of images</title>
+  <link rel="stylesheet" href="./css/normalize.css">
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/images.css">
 </head>
 <body>
 <div class="container">
   <h1>Modern way of images</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, earum.</p>
+  
+  <!--
+    Известные баги aspect-ratio:
+    - Не работает с flexbox и grid
+    - Не работает с box-sizing: content-box
+    - Установка aspect-ratio без width и height дает сдвиг CLS
+    - Если изображение не загрузилось (не существует) то оно сильно растягивается, поэтому в src всегда имеем заглушку по умолчанию
+    https://www.quirksmode.org/blog/archives/2021/05/aspectratio.html
+    
+    Ссылки с примерами для прочтения об aspect-ratio:
+    https://web.dev/optimize-cls/?utm_source=lighthouse&utm_medium=devtools#images-without-dimensions
+    https://web.dev/aspect-ratio/
+    
+    Хорошая статья, в которой девушка делает карточки на основе aspect-ratio
+    https://css-tricks.com/variable-aspect-ratio-card-with-conic-gradients-meeting-along-the-diagonal/
+    
+    Калькулятор aspect-ratio: https://aspectratiocalculator.com/4-3.html
+  -->
+  
+  <!--
+    srcset - Браузер сам выбирает какое изображение поставить, они все должны быть такого же aspect-ration
+    600w - это размер изображения, а не экрана при котором ставить
+    Может еще быть плотность пикселей (ретина и тп) - 1x, 2x
+    srcset="https://via.placeholder.com/600x450 600w, https://via.placeholder.com/720x540 720w, https://via.placeholder.com/880x600 880w"
+  -->
+  
+  <!--
+    MIME TYPES:
+     - image/jpeg
+     - image/png
+     - image/svg+xml
+     - image/webp
+     
+     <img> используется, если браузер не поддерживает img элемент
+  -->
   
 <!--
-  Известные баги aspect-ratio:
-  - Не работает с flexbox и grid
-  - Не работает с box-sizing: content-box
-  - Установка aspect-ratio без width и height дает сдвиг CLS
-  - Если изображение не загрузилось (не существует) то оно сильно растягивается, поэтому в src всегда имеем заглушку по умолчанию
-  https://www.quirksmode.org/blog/archives/2021/05/aspectratio.html
+  Для lazy loading используем https://github.com/aFarkas/lazysizes, потому что их рекомендует Google
+  - добавляем class="lazyload"
+  - меняем srcset на data-srcset
+  - устанавливаем customMedia до загрузки скрипта
+  - синхронизируем media с css (scss): https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/custommedia
+ -->
   
-  Ссылки с примерами для прочтения об aspect-ratio:
-  https://web.dev/optimize-cls/?utm_source=lighthouse&utm_medium=devtools#images-without-dimensions
-  https://web.dev/aspect-ratio/
-  
-  Хорошая статья, в которой девушка делает карточки на основе aspect-ratio
-  https://css-tricks.com/variable-aspect-ratio-card-with-conic-gradients-meeting-along-the-diagonal/
-  
-  Калькулятор aspect-ratio: https://aspectratiocalculator.com/4-3.html
-  
--->
-
-
-  
-  <h2>Type 1</h2>
   <div class="type-1">
-    <img
-        width="880"
-        height="600"
-        src="https://via.placeholder.com/800x600"
-        srcset="https://via.placeholder.com/600x450 600w, https://via.placeholder.com/720x540 720w, https://via.placeholder.com/880x600 880w"
-        alt="alt
-    ">
-    <img src="https://via.placeholder.com/1600x1200" alt="alt" width="1600" height="1200">
-    <img
-        src="inexistent"
-        alt="inexistent type-1"
-        width="880"
-        height="600"
-    >
+  
+    <script>
+      window.lazySizesConfig = window.lazySizesConfig || {};
+      window.lazySizesConfig.customMedia = {
+        '--small': '(max-width: 600px)',
+        '--medium': '(max-width: 980px)',
+        '--large': '(min-width: 981px)',
+      };
+    </script>
+  
+    <figure>
+      <picture>
+        <source data-srcset="https://via.placeholder.com/600x450" media="--small" type="image/jpeg">
+        <source data-srcset="https://via.placeholder.com/980x735" media="--medium" type="image/jpeg" >
+        <source data-srcset="https://via.placeholder.com/1024x768" media="--large" type="image/jpeg">
+        <img data-src="https://via.placeholder.com/800x600" alt="..." title="..." width="1024" height="768" class="lazyload">
+      </picture>
+      <figcaption>Description for images always good for SEO</figcaption>
+    </figure>
+    
+    <section>
+    
+ 
+    <h2>Aspect-ratio</h2>
+    <p>Известные баги aspect-ratio:</p>
+      <ul>
+        <li>Не работает с flexbox и grid</li>
+        <li>Не работает с box-sizing: content-box</li>
+        <li>Установка aspect-ratio без width и height дает сдвиг CLS</li>
+        <li>Если изображение не загрузилось (не существует) то оно сильно растягивается, поэтому в src всегда имеем заглушку по умолчанию</li>
+      </ul>
+    <p>Полезная ссылка: <a href="https://www.quirksmode.org/blog/archives/2021/05/aspectratio.html" target="_blank">https://www.quirksmode.org/blog/archives/2021/05/aspectratio.html</a></p>
+    <p>Ссылки с примерами для прочтения об aspect-ratio:</p>
+    <ul>
+      <li><a href="https://web.dev/optimize-cls/#images-without-dimensions" target="_blank">https://web.dev/optimize-cls/#images-without-dimensions</a></li>
+      <li><a href="https://web.dev/aspect-ratio/" target="_blank">https://web.dev/aspect-ratio/</a></li>
+    </ul>
+    <p>    Хорошая статья, в которой девушка делает карточки на основе aspect-ratio</p>
+    <a href="https://css-tricks.com/variable-aspect-ratio-card-with-conic-gradients-meeting-along-the-diagonal/" target="_blank">https://css-tricks.com/variable-aspect-ratio-card-with-conic-gradients-meeting-along-the-diagonal/</a>
+    <p>Калькулятор aspect-ratio: <a href="https://aspectratiocalculator.com/4-3.html" target="_blank">https://aspectratiocalculator.com/4-3.html</a></p>
+    </section>
+    <section>
+      <h2>MIME TYPES</h2>
+      <ul>
+        <li>image/jpeg</li>
+        <li>image/png</li>
+        <li>image/svg+xml</li>
+        <li>image/webp</li>
+      </ul>
+      Тег IMG используется, если браузер не поддерживает picture элемент
+      
+    </section>
+    
+    <section>
+      <h2>Lazy loading</h2>
+      <p><b>Для lazy loading используем <a href="https://github.com/aFarkas/lazysizes" target="_blank">https://github.com/aFarkas/lazysizes</a>, потому что их рекомендует Google</b></p>
+      <ul>
+        <li>добавляем class="lazyload"</li>
+        <li>меняем srcset на data-srcset</li>
+        <li>устанавливаем customMedia до загрузки скрипта</li>
+        <li>синхронизируем media с css (scss): <a href="https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/custommedia" target="_blank">https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/custommedia</a></li>
+      </ul>
+    </section>
+    
+
+  
+    <!-- Если изображение не загрузилось (не существует) то оно сильно растягивается, поэтому в src всегда имеем заглушку по умолчанию  -->
+    
+<!--    <img-->
+<!--        src="inexistent"-->
+<!--        alt="inexistent type-1"-->
+<!--        width="800"-->
+<!--        height="600"-->
+<!--    >-->
+  
   </div>
 
 
-
-
 </div>
+
+<script src="js/lazysizes.js" async></script>
 </body>
 </html>
