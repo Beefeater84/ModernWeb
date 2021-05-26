@@ -6,6 +6,8 @@
 
 body{
     font-size: 18px;
+    font-family: -apple-system,Arial,BlinkMacSystemFont,roboto slab,droid serif,segoe ui,Ubuntu,Cantarell,Georgia,sans-serif;
     line-height: 1.5rem;
-    font-family: sans-serif;
+    word-break: break-word;
 }
+
