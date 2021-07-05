@@ -1,13 +1,23 @@
-.container{
+.container {
     width: 1024px;
     max-width: 100%;
     margin: 0 auto;
 }
 
-body{
+body {
     font-size: 18px;
-    font-family: -apple-system,Arial,BlinkMacSystemFont,roboto slab,droid serif,segoe ui,Ubuntu,Cantarell,Georgia,sans-serif;
+    font-family: -apple-system, Arial, BlinkMacSystemFont, roboto slab, droid serif, segoe ui, Ubuntu, Cantarell, Georgia, sans-serif;
     line-height: 1.5rem;
     word-break: break-word;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+input{
+    margin-block: 1rem;
 }
 

@@ -1,0 +1,169 @@
+/*
+   :is() :where()
+
+   padding-block, padding-inline
+
+   :focus-within
+
+   :empty
+
+   :not( .class )
+*/
+
+
+/*
+ :where()
+ :is()
+ https://developer.mozilla.org/en-US/docs/Web/CSS/:where
+
+ Здесь больше примеров кода
+ https://developer.mozilla.org/en-US/docs/Web/CSS/:is
+
+ Вместо кучи селекторов через запятую пишем один
+
+ .header p:hover,
+ .main p:hover,
+ .footer p:hover{
+    code
+ }
+
+ :where(.header, .main, .footer)  p:hover{
+    code
+ }
+*/
+
+/*
+Разница между :is() и :where()
+:is() - добавляет селекторам вложенности, а значит и вес
+Если бы в примере ниже мы использовали :where() то ссылки были бы оранжевыми, а в is они останутся красными
+*/
+:is(footer .is-styled a) {
+    color: red;
+}
+
+.is-styled a {
+    color: orange;
+}
+
+
+/*
+   padding-block - padding сверху и снизу
+   padding-inline - padding справа и слева
+   https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block
+
+   padding-block: unset;
+
+*/
+
+.b-padding-block {
+    padding-inline: 1rem;
+
+    /* Может принимать 1 или 2 значения */
+    padding-block: 1rem 2rem;
+
+    /*Глобальное значение не задано */
+    padding-block: unset;
+}
+
+/*
+    Зависит от направления текста, например если поставить значение текста сверху вниз и справа налево, то он будет padding-block будет добавлять горизонтальные пробелы
+    writing-mode: vertical-rl;
+*/
+
+.b-padding-block--vertical-text {
+    writing-mode: vertical-rl;
+    padding-block: 20px 40px;
+}
+
+/*
+  :focus-within подсчвечивает элемент, если он находится в фокусе или его потомок находится в фокусе
+*/
+
+form:focus-within {
+    border: 0.1rem solid darkmagenta;
+    background-color: rgba(150, 0, 86, 0.1);
+}
+
+input:focus-visible {
+    outline: none;
+    border: 0.1rem solid darkmagenta;
+}
+
+
+form {
+    width: 50%;
+    padding-block: 1rem;
+    padding-inline: 1rem;
+    margin-block: 2rem;
+    border: 0.1rem solid slateblue;
+    border-radius: 0.5rem;
+    background-color: rgba(106, 90, 205, 0.1);
+}
+
+input {
+    font-family: -apple-system, Arial, BlinkMacSystemFont, roboto slab, droid serif, segoe ui, Ubuntu, Cantarell, Georgia, sans-serif;
+    font-size: 1rem;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    border: 0.1rem solid slateblue;
+    border-radius: 0.3rem;
+}
+
+/*
+    :empty - Нахиодит любой псевдокласс без потомков. Пробелы считаются потомками
+*/
+
+.box {
+    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+    height: 200px;
+    width: 200px;
+}
+
+.box:empty {
+    background: forestgreen;
+}
+
+/*
+    :not( .class ) - находит все, что не является им.
+    На практике подходит для:
+     - Найти все элементы, кроме последнего (вместо задавания всем рамки, а потом убирания у последнего)
+     - Задавать цвет ссылкам по умолчанию, не трогая каскад
+
+
+ */
+
+.not a{
+    color: honeydew;
+    padding-inline: 1.5rem;
+    padding-block: 0.5rem;
+    background-color: royalblue;
+    border-radius: 4px;
+}
+
+.not a:hover{
+    background-color: slateblue;
+}
+
+.not a:not(:first-child) {
+    margin-inline: 1rem 0;
+}
+
+
+.no-cascade{
+    margin-block: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.no-cascade a[href]:not([class]) {
+    color: #008000;
+}
+
+.no-cascade .royal{
+    color: royalblue;
+}
+
+
+
+
+
