@@ -144,8 +144,14 @@ input {
     background-color: slateblue;
 }
 
+/* Human-readable version gaps in lists */
 .not a:not(:first-child) {
     margin-inline: 1rem 0;
+}
+
+/* Changing all <a> colors, without touching cascade */
+.no-cascade a[href]:not([class]) {
+    color: #008000;
 }
 
 
@@ -155,9 +161,7 @@ input {
     flex-direction: column;
 }
 
-.no-cascade a[href]:not([class]) {
-    color: #008000;
-}
+
 
 .no-cascade .royal{
     color: royalblue;
